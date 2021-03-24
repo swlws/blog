@@ -6,7 +6,7 @@ VSCode-RSS is a Visual Studio Code extension that provides an embedded RSS reade
 
 ## recommand config
 
-```js
+```json
 "rss.accounts": {
     "9308e6d0-7c89-11eb-a900-45585826a443": {
       "name": "Default",
@@ -39,3 +39,4 @@ VSCode-RSS is a Visual Studio Code extension that provides an embedded RSS reade
     }
   },
 ```
+
