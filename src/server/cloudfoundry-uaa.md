@@ -2,7 +2,7 @@
 
 
 
-cloudfoundry是一个大的服务，其中包含UAA模块，UAA可以单独部署，UAA有自身的命令行API
+cloudfoundry是一个云服务平台，其中包含UAA模块，UAA可以单独部署，UAA有自身的命令行API
 
 UAA部署方式：https://docs.cloudfoundry.org/concepts/architecture/uaa.html
 
@@ -68,9 +68,9 @@ https://bosh.io/jobs/uaa?source=github.com/cloudfoundry/uaa-release
 
 
 
+# WAR
 
 
-## WAR
 
 java
 
@@ -158,9 +158,9 @@ LOGIN_SECRET: loginsecret
 #spring_profiles: postgresql,default
 #database:
 #  driverClassName: org.postgresql.Driver
-#  url: jdbc:postgresql://192.168.10.12:5432/uaa
-#  username: test_user
-#  password: abc123d4!
+#  url: jdbc:postgresql://192.168.10.110:5432/uaa
+#  username: postgres
+#  password: 123
   
 #jwt:
 #  token:
@@ -205,6 +205,22 @@ jwt:
       EkIDjDK6fU8PG9/IvNP2HWScwUyfEkFw+dBqaYtu0Jp/DfE2jDHabRbQJqsQadAN
       XQIDAQAB
       -----END PUBLIC KEY-----
+      
+oauth:
+  clients:
+    admin:
+      authorized-grant-types: client_credentials
+      scope: read,write,password
+      authorities: ROLE_CLIENT,ROLE_ADIN
+      id: admin
+      secret: adminclientsecret
+      resource-ids: clients
+
+smtp:
+  host: testmail.virtual.com
+  port: 25
+  user: test@testmail.virtual.com
+  password: xxx
 ```
 
 
@@ -228,7 +244,11 @@ export UAA_CONFIG_PATH=/root/.uaa
 
 
 
-## UAAC
+# UAAC
+
+Cli-command line interface
+
+
 
 ruby安装
 
