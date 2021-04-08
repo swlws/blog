@@ -68,7 +68,7 @@ UAA war有默认的配置文件[uaa.yml](https://github.com/cloudfoundry/uaa/blo
 
 ```yml
 issuer:
-  uri: http://192.168.10.56:8080/uaa
+  uri: http://localhost:8080/uaa
 
 encryption:
   active_key_label: CHANGE-THIS-KEY
@@ -122,7 +122,7 @@ LOGIN_SECRET: loginsecret
 spring_profiles: postgresql,default
 database:
   driverClassName: org.postgresql.Driver
-  url: jdbc:postgresql://192.168.10.110:5432/uaa
+  url: jdbc:postgresql://localhost:5432/uaa
   username: postgres
   password: 123
 
@@ -189,12 +189,16 @@ token的分发者
 
 UAA will use an in-memory database that is torn down between runs unless you choose a spring profile or a specific database configuration as a toplevel setting in uaa.yml. An example connecting to a postgres database:
 
->spring_profiles: postgresql,default
->database:
->  driverClassName: org.postgresql.Driver
->  url: jdbc:postgresql://192.168.10.110:5432/uaa
->  username: postgres
->  password: 123
+```yaml
+spring_profiles: postgresql,default
+database:
+  driverClassName: org.postgresql.Driver
+  url: jdbc:postgresql://localhost:5432/uaa
+  username: postgres
+  password: 123
+```
+
+
 
 
 
@@ -217,11 +221,13 @@ openssl rsa -pubout -in privkey.pem -out pubkey.pem
 
 邮件服务器配置，允许通过页面注册用户，需要配置邮箱服务器。
 
-> smtp:
->   host: testmail.virtual.com
->   port: 25
->   user: test@testmail.virtual.com
->   password: xxx
+```yaml
+smtp:
+  host: testmail.virtual.com
+  port: 25
+  user: test@testmail.virtual.com
+  password: xxx
+```
 
 
 
@@ -229,11 +235,13 @@ openssl rsa -pubout -in privkey.pem -out pubkey.pem
 
 正常tomcat部署即可。
 
+浏览器访问： http://localhost:8080/uaa，有登陆界面即可
+
 
 
 # 三、UAAC
 
-管理员用户的管理工具，可以对client、group、user、scope进行管理。
+管理员用户的命令行管理工具，可以对client、group、user、scope进行管理。
 
 **参考：**
 
@@ -389,7 +397,7 @@ xhr: [doc](https://docs.cloudfoundry.org/api/uaa/version/75.0.0/index.html#with-
 客户端admin账户是UAA服务的内置账户，存在配置文件`./WEB-INF/spring/oauth-clients.xml`,有UAA服务中client、group、user的读写权限。
 
 ```bash
-curl 'http://192.168.10.56:8080/uaa/oauth/token' -i -u 'admin:adminsecret' -X POST -H 'Content-Type: application/x-www-form-urlencoded' -H 'Accept: application/json' -d 'grant_type=client_credentials&token_format=opaque'
+curl 'http://localhost:8080/uaa/oauth/token' -i -u 'admin:adminsecret' -X POST -H 'Content-Type: application/x-www-form-urlencoded' -H 'Accept: application/json' -d 'grant_type=client_credentials&token_format=opaque'
 ```
 
 **参数**
@@ -427,7 +435,7 @@ Response
 xhr：[doc](https://docs.cloudfoundry.org/api/uaa/version/75.0.0/index.html#create-6)
 
 ```bash
- curl 'http://192.168.10.56:8080/uaa/oauth/clients' -i -X POST -H 'Content-Type: application/json' -H 'Authorization: Bearer ${ADMIN_TOKEN}' -H 'Accept: application/json' -d '{ "scope" : [ "clients.read", "clients.write", "openid", "profile", "resource.read", "resource.write" ], "client_id" : "bitsnav", "client_secret" : "secret", "resource_ids" : [ ], "authorized_grant_types" : [ "client_credentials" ], "authorities" : [ "clients.read", "clients.write", "openid", "profile","resource.read", "resource.write" ], "token_salt" : "cdGXbD", "autoapprove" : true, "name" : "bitsnav web client" }'
+ curl 'http://localhost:8080/uaa/oauth/clients' -i -X POST -H 'Content-Type: application/json' -H 'Authorization: Bearer ${ADMIN_TOKEN}' -H 'Accept: application/json' -d '{ "scope" : [ "clients.read", "clients.write", "openid", "profile", "resource.read", "resource.write" ], "client_id" : "uiclient", "client_secret" : "secret", "resource_ids" : [ ], "authorized_grant_types" : [ "client_credentials" ], "authorities" : [ "clients.read", "clients.write", "openid", "profile","resource.read", "resource.write" ], "token_salt" : "cdGXbD", "autoapprove" : true, "name" : "uiclient web client" }'
 ```
 
 **请求头：**
@@ -447,7 +455,7 @@ xhr：[doc](https://docs.cloudfoundry.org/api/uaa/version/75.0.0/index.html#crea
 xhr:[doc](https://docs.cloudfoundry.org/api/uaa/version/75.0.0/index.html#delete-6)
 
 ```bash
-curl 'http://192.168.10.56:8080/uaa/oauth/clients/bitsnav' -i -X DELETE -H 'Authorization: Bearer ${ADMIN_TOKEN}' -H 'Accept: application/json'
+curl 'http://localhost:8080/uaa/oauth/clients/uiclient' -i -X DELETE -H 'Authorization: Bearer ${ADMIN_TOKEN}' -H 'Accept: application/json'
 ```
 
 Response:
@@ -459,7 +467,7 @@ Response:
         "clients.write",
       	"openid"
     ],
-    "client_id": "bitsnav",
+    "client_id": "uiclient",
     "resource_ids": [
         "none"
     ],
@@ -477,7 +485,7 @@ Response:
         "clients.write"
     ],
     "token_salt": "cdGXbD",
-    "name": "bitsnav web client",
+    "name": "uiclient web client",
     "lastModified": 1617778508969,
     "required_user_groups": []
 }
@@ -490,7 +498,7 @@ Response:
 xhr:[doc](https://docs.cloudfoundry.org/api/uaa/version/75.0.0/index.html#update-6)
 
 ```bash
-curl 'http://localhost:8080/uaa/oauth/clients/bitsnav' -i -X PUT -H 'Content-Type: application/json' -H 'Authorization: Bearer ${ADMIN_TOKEN}' -H 'Accept: application/json' -d '{"client_id": "bitsnav", "scope" : [ "swl.test" ] }'
+curl 'http://localhost:8080/uaa/oauth/clients/uiclient' -i -X PUT -H 'Content-Type: application/json' -H 'Authorization: Bearer ${ADMIN_TOKEN}' -H 'Accept: application/json' -d '{"client_id": "uiclient", "scope" : [ "swl.test" ] }'
 ```
 
 
@@ -500,7 +508,7 @@ curl 'http://localhost:8080/uaa/oauth/clients/bitsnav' -i -X PUT -H 'Content-Typ
 xhr：[doc](https://docs.cloudfoundry.org/api/uaa/version/75.0.0/index.html#retrieve-3)
 
 ```bash
-curl 'http://192.168.10.56:8080/uaa/oauth/clients/bitsnav' -i -X GET -H 'Authorization: Bearer ${ADMIN_TOKEN}' -H 'Accept: application/json'
+curl 'http://localhost:8080/uaa/oauth/clients/uiclient' -i -X GET -H 'Authorization: Bearer ${ADMIN_TOKEN}' -H 'Accept: application/json'
 ```
 
 Response:
@@ -511,7 +519,7 @@ Response:
         "clients.read",
         "clients.write"
     ],
-    "client_id": "bitsnav",
+    "client_id": "uiclient",
     "resource_ids": [
         "none"
     ],
@@ -529,17 +537,17 @@ Response:
         "clients.write"
     ],
     "token_salt": "cdGXbD",
-    "name": "bitsnav web client",
+    "name": "uiclient web client",
     "lastModified": 1617778508969,
     "required_user_groups": []
 }
 ```
 
-## 三、Group API
+## 3. Group API
 
 [doc](https://docs.cloudfoundry.org/api/uaa/version/75.0.0/index.html#groups)
 
-## 四、User API
+## 4. User API
 
 [doc](https://docs.cloudfoundry.org/api/uaa/version/75.0.0/index.html#users)
 
