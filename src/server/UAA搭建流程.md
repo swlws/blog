@@ -563,3 +563,11 @@ The table below describes the client-side tools and libraries UAA uses:
 | [Spring Security OAuth](http://projects.spring.io/spring-security-oauth/) | Java     |
 | [CF Java Client](https://github.com/cloudfoundry/cf-java-client) | Java     |
 | [UAA Javascript SDK (Singular)](https://github.com/cloudfoundry/uaa-singular) | JS       |
+
+
+
+
+
+cleint: c5fc57d03993350ae82a
+
+passwd: 0d5b13ca7819f593ce37d00152756714b90a799e
