@@ -803,3 +803,104 @@ use(plugin: Plugin_2, ...options: any[]): this;
 
 vue3使用proxy实现响应式系统
 
+**watch的简单实现：**
+
+```js
+const runningEffects = [];
+
+function createEffect(fn) {
+  // 将传来的 fn 包裹在一个副作用函数中
+  const effect = () => {
+    runningEffects.push(effect);
+    fn();
+    runningEffects.pop();
+  };
+
+  // 立即自动执行副作用
+  effect();
+}
+
+// 记录reactive对象、及引用了reactive对象的函数
+let callEffect = [];
+
+/**
+ * 收集变化
+ *
+ * @param {*} target
+ * @param {*} property
+ * @returns
+ */
+function track(target, property) {
+  for (let item of callEffect) {
+    // 已经存在了 则不再添加
+    if (item.target === target && item.property === property) {
+      return;
+    }
+  }
+
+  console.log("track", target, property);
+
+  let effect = runningEffects[runningEffects.length - 1];
+  if (!effect) return;
+
+  callEffect.push({
+    target,
+    property,
+    fn: effect,
+  });
+}
+
+/**
+ * 触发变化
+ *
+ * @param {*} target
+ * @param {*} property
+ */
+function trigger(target, property) {
+  console.log("trigger", target, property);
+
+  for (let item of callEffect) {
+    if (item.target === target && item.property === property) {
+      item.fn();
+    }
+  }
+}
+
+/**
+ * 响应式对象
+ *
+ * @param {*} obj
+ * @returns
+ */
+function reactive(obj) {
+  return new Proxy(obj, {
+    get(target, property, receiver) {
+      track(target, property);
+
+      return Reflect.get(...arguments);
+    },
+    set(target, property, value, reveiver) {
+      let res = Reflect.set(...arguments);
+
+      // Reflect在triiger之前，修改了值之后再触发effect
+      trigger(target, property, value);
+      return res;
+    },
+  });
+}
+
+let v1 = reactive({ v: 1, name: "v1" });
+let v2 = reactive({ v: 2, name: " v2" });
+
+createEffect(() => {
+  let v = v1.v + v2.v;
+  console.log("emit effect", v);
+});
+
+let timer = setInterval(() => {
+  console.log();
+  v1.v += 10;
+}, 1000);
+
+```
+
