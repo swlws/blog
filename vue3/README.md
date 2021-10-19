@@ -821,6 +821,7 @@ function createEffect(fn) {
 }
 
 // 记录reactive对象、及引用了reactive对象的函数
+// 数据结构：{target: object, property: string, fn: ()=>{}[]}
 let callEffect = [];
 
 /**
@@ -831,22 +832,30 @@ let callEffect = [];
  * @returns
  */
 function track(target, property) {
+  // 单独的由proxy的set被触发时，runningEffects为空
+  // 由createEffect --> proxy的set 触发是，runningEffects不为空
+  let effect = runningEffects[runningEffects.length - 1];
+  if (!effect) return;
+
+  console.log("track", target, property);
+
   for (let item of callEffect) {
-    // 已经存在了 则不再添加
     if (item.target === target && item.property === property) {
+      let fn = item.fn;
+
+      // 已经存在了 则不再添加
+      if (!fn.includes(effect)) {
+        item.fn.push(effect);
+      }
+
       return;
     }
   }
 
-  console.log("track", target, property);
-
-  let effect = runningEffects[runningEffects.length - 1];
-  if (!effect) return;
-
   callEffect.push({
     target,
     property,
-    fn: effect,
+    fn: [effect],
   });
 }
 
@@ -861,7 +870,7 @@ function trigger(target, property) {
 
   for (let item of callEffect) {
     if (item.target === target && item.property === property) {
-      item.fn();
+      item.fn.forEach((fn) => fn());
     }
   }
 }
@@ -894,13 +903,138 @@ let v2 = reactive({ v: 2, name: " v2" });
 
 createEffect(() => {
   let v = v1.v + v2.v;
+
   console.log("emit effect", v);
+  console.log();
 });
 
-let timer = setInterval(() => {
+createEffect(() => {
+  let v = v1.v + v2.v + 100;
+
+  console.log("2 emit effect", v);
   console.log();
-  v1.v += 10;
+});
+
+let i = 0;
+let timer = setInterval(() => {
+  console.log(i++, "--------");
+  v1.v += 100;
 }, 1000);
 
 ```
+
+
+
+## 14.1 reactive
+
+```js
+import { reactive } from 'vue'
+
+const book = reactive({
+  author: 'Vue Team',
+  title: 'Vue 3 Guide',
+})
+
+// 使用解构的两个 property 的响应性都会丢失
+let { author, title } = book 
+
+// 正确做法
+let { author, title } = toRefs(book)
+```
+
+
+
+## 14.2 readonly
+
+只读的 proxy 对象
+
+```js
+import { reactive, readonly } from 'vue'
+
+const original = reactive({ count: 0 })
+
+const copy = readonly(original)
+
+// 通过 original 修改 count，将会触发依赖 copy 的侦听器
+
+original.count++
+
+// 通过 copy 修改 count，将导致失败并出现警告
+copy.count++ // 警告: "Set operation on key 'count' failed: target is readonly."
+```
+
+
+
+## 14.3 computed
+
+```js
+const count = ref(1)
+const plusOne = computed(() => count.value + 1)
+
+// 带有set的computed
+const plusOne = computed({
+  get: () => count.value + 1,
+  set: val => {
+    count.value = val - 1
+  }
+})
+```
+
+
+
+## 14.4 watchEffect
+
+
+
+- watchEffect
+- watchPostEffect
+- WatchSyncEffect
+
+```js
+// 在组件更新后触发，这样你就可以访问更新的 DOM。
+// 注意：这也将推迟副作用的初始运行，直到组件的首次渲染完成。
+watchEffect(
+  () => {
+    /* ... */
+  },
+  {
+    flush: 'post' // 默认为pre
+  }
+)
+```
+
+### 侦听器调试
+
+`onTrack` 和 `onTrigger` 选项可用于调试侦听器的行为。
+
+- `onTrack` 将在响应式 property 或 ref 作为依赖项被追踪时被调用。
+- `onTrigger` 将在依赖项变更导致副作用被触发时被调用。
+
+```js
+watchEffect(
+  () => {
+    /* 副作用 */
+  },
+  {
+    onTrigger(e) {
+      debugger
+    }
+  }
+)
+```
+
+
+
+## 14.5 watch
+
+`watch` API 完全等同于组件`侦听器 property`。`watch` 需要侦听特定的数据源，并在回调函数中执行副作用。默认情况下，它也是惰性的，即只有当被侦听的源发生变化时才执行回调。
+
+- 与 `watchEffect` 比较，`watch` 允许我们：
+  - 懒执行副作用；
+  - 更具体地说明什么状态应该触发侦听器重新运行；
+  - 访问侦听状态变化前后的值。
+
+参数说明：
+
+- 可以监听一个、多个数据源
 
