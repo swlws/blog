@@ -1,28 +1,16 @@
 # UAA
 
+cloudfoundry 是一个云服务平台，其中包含 UAA 模块，UAA 可以单独部署，UAA 有自身的命令行 API
 
+UAA 部署方式：https://docs.cloudfoundry.org/concepts/architecture/uaa.html
 
-cloudfoundry是一个云服务平台，其中包含UAA模块，UAA可以单独部署，UAA有自身的命令行API
-
-UAA部署方式：https://docs.cloudfoundry.org/concepts/architecture/uaa.html
-
- 
-
-官方文档提供的部署方式，需要gradle支持，会下载依赖，这个需要翻墙：
+官方文档提供的部署方式，需要 gradle 支持，会下载依赖，这个需要翻墙：
 
 \> Downloading https://services.gradle.org/distributions/gradle-6.3-bin.zip
 
- 
-
 UAA API: https://docs.cloudfoundry.org/api/uaa/version/75.0.0/index.html#overview
 
-
-
 The User Account and Authentication (UAA) service is the primary authentication service on the Predix platform. It enables developers to add user authentication and authorization capabilities to their application. Application developers can obtain a UAA instance from the Predix marketplace and configure the instance to authenticate trusted users and clients for their application. UAA service offers a virtual OAuth2 server to customers to issue and validate tokens for client applications.
-
-
-
-
 
 ## What Is UAA?
 
@@ -50,8 +38,6 @@ The major features of UAA include:
 - Token exchange for SAML and JWT bearers
 - Rest APIs for authentication, authorization, and configuration management
 
-
-
 ## Properties[¶](https://bosh.io/jobs/uaa?source=github.com/cloudfoundry/uaa-release#properties)
 
 ### `encryption`[¶](https://bosh.io/jobs/uaa?source=github.com/cloudfoundry/uaa-release#p%3dencryption)
@@ -64,19 +50,13 @@ The major features of UAA include:
 
 https://bosh.io/jobs/uaa?source=github.com/cloudfoundry/uaa-release
 
-
-
-
-
 # WAR
-
-
 
 java
 
-> 大于1.7 小于10
+> 大于 1.7 小于 10
 
-war包下载
+war 包下载
 
 > https://repo1.maven.org/maven2/org/cloudfoundry/identity/cloudfoundry-identity-uaa/
 
@@ -90,9 +70,9 @@ tomcat-1.8
 
 /root/.uaa/uaa.yml
 
-1.jwt证书
+1.jwt 证书
 
->  openssl genrsa -out signingkey.pem 2048 
+> openssl genrsa -out signingkey.pem 2048
 >
 > openssl rsa -in signingkey.pem -pubout -out verificationkey.pem
 
@@ -161,7 +141,7 @@ LOGIN_SECRET: loginsecret
 #  url: jdbc:postgresql://192.168.10.110:5432/uaa
 #  username: postgres
 #  password: 123
-  
+
 #jwt:
 #  token:
 #    signing-key: tokenKey
@@ -205,7 +185,7 @@ jwt:
       EkIDjDK6fU8PG9/IvNP2HWScwUyfEkFw+dBqaYtu0Jp/DfE2jDHabRbQJqsQadAN
       XQIDAQAB
       -----END PUBLIC KEY-----
-      
+
 oauth:
   clients:
     admin:
@@ -223,10 +203,6 @@ smtp:
   password: xxx
 ```
 
-
-
-
-
 /etc/profile
 
 ```bash
@@ -240,29 +216,16 @@ export PATH=$CATALINA_HOME/bin:$PATH
 export UAA_CONFIG_PATH=/root/.uaa
 ```
 
-
-
-
-
 # UAAC
 
 Cli-command line interface
 
-
-
-ruby安装
+ruby 安装
 
 > yum install ruby-devel.x86_64
 >
 > yum install gcc
->
-> 
-
-
 
 参考
 
-* https://cookbook.digitaltwin.io/section-general-software3/user-account-and-authentication-server
-
-
-
+- https://cookbook.digitaltwin.io/section-general-software3/user-account-and-authentication-server

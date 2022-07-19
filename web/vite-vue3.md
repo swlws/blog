@@ -1,10 +1,6 @@
-## 基于Vite2+Vue3的项目复盘总结
-
-
+## 基于 Vite2+Vue3 的项目复盘总结
 
 原文： https://juejin.cn/post/6969758357288648718
-
-
 
 ## 1.项目背景与技术选型
 
@@ -22,9 +18,9 @@
 
 ### 1.2 技术选型
 
-我觉得技术选型一定得从需求和业务出发，这是最重要的，不能为了使用新技术而使用。虽然说这么说，但我还是选择了比较新的技术，原因是我们这套业务系统算是一个产品雏形，也**不需要兼容任何版本IE浏览器**，产品的周期与稳定性都还不确定，而且我们要在很短的时间内做出一个雏形，另外我确实想把刚学的技术实践一下，不然确实会忘了噢。
+我觉得技术选型一定得从需求和业务出发，这是最重要的，不能为了使用新技术而使用。虽然说这么说，但我还是选择了比较新的技术，原因是我们这套业务系统算是一个产品雏形，也**不需要兼容任何版本 IE 浏览器**，产品的周期与稳定性都还不确定，而且我们要在很短的时间内做出一个雏形，另外我确实想把刚学的技术实践一下，不然确实会忘了噢。
 
-基于这样的考虑，我选择了当时发布不久（刚发布一周不到）的`Vite2.0`作为我们项目的脚手架，选择`Vue3.0`进行开发，UI框架是还处于Beta版本的`Element-Plus`，甚是刺激！我简单画了一张图：
+基于这样的考虑，我选择了当时发布不久（刚发布一周不到）的`Vite2.0`作为我们项目的脚手架，选择`Vue3.0`进行开发，UI 框架是还处于 Beta 版本的`Element-Plus`，甚是刺激！我简单画了一张图：
 
 ![图片](https://mmbiz.qpic.cn/sz_mmbiz_png/H8M5QJDxMHp90D6RnMU4HRqCwSEHZvcJZQeqQs5Lcegb4XrueNdCgztL7RcbT62pEtGCRL5OIHW0uvMkq0mkQQ/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1)image.png
 
@@ -36,7 +32,7 @@
 
 ![图片](https://mmbiz.qpic.cn/sz_mmbiz_png/H8M5QJDxMHp90D6RnMU4HRqCwSEHZvcJTcyXzia6e3YvCqVicuicW1yBd3yViatWiaJVYkV1tpxJBafiblZt5Vqbuvhw/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1)image.png
 
-Vite创建Vue3.0项目很简单，一行命令可以搞定：
+Vite 创建 Vue3.0 项目很简单，一行命令可以搞定：
 
 ```
 yarn create @vitejs/app my-vue-app --template vue
@@ -55,19 +51,19 @@ yarn create @vitejs/app
 当时也是刚学完，不知道如何搭建一个项目，但是有一个是必须要去做的：团队开发规范。我采用的是业内比较成熟的方案：
 
 - 语法风格检测：`ESLint+Prettier`
-- Git Message提交规范：Angular提交规范
+- Git Message 提交规范：Angular 提交规范
 
 #### 2.1.1 代码风格约束
 
-我们先来看看在Vue3.0的项目中如何使用`ESLint`和`Prettier`对代码风格进行约束。
+我们先来看看在 Vue3.0 的项目中如何使用`ESLint`和`Prettier`对代码风格进行约束。
 
 首先安装这几个包：
 
 - `eslint`：代码质量检测（用`var`还是`let`，用`==`还是`===`...）
 - `prettier`：代码风格检测（加不加尾逗号，单引号还是双引号...）
-- `eslint-config-prettier`：解决ESLint与Prettier的风格冲突
-- `eslint-plugin-prettier`：ESLint的插件，集成Prettier的功能
-- `eslint-plugin-vue`：ESLint的插件，增加Vue的检测能力
+- `eslint-config-prettier`：解决 ESLint 与 Prettier 的风格冲突
+- `eslint-plugin-prettier`：ESLint 的插件，集成 Prettier 的功能
+- `eslint-plugin-vue`：ESLint 的插件，增加 Vue 的检测能力
 
 ```
 yarn add eslint prettier eslint-config-prettier eslint-plugin-prettier eslint-plugin-vue -D
@@ -121,17 +117,17 @@ module.exports = {
 复制代码
 ```
 
-然后使用`ctrl+shift+P`调出控制台输入`Reload Window`配置即可生效，以后想拓展代码的风格都在`prettier.config.js`进行配置，而代码语法相关规则在`.eslintrc`中的rules配置即可。相关规则文档：
+然后使用`ctrl+shift+P`调出控制台输入`Reload Window`配置即可生效，以后想拓展代码的风格都在`prettier.config.js`进行配置，而代码语法相关规则在`.eslintrc`中的 rules 配置即可。相关规则文档：
 
 - ESLint Rules
-- Prettier中文网
+- Prettier 中文网
 
-#### 2.1.2 Git提交约束
+#### 2.1.2 Git 提交约束
 
 接下来我们需要对我们的提交进行约定，先安装一下这几个包：
 
-- `husky`：触发Git Hooks,执行脚本
-- `lint-staged`：检测文件，只对暂存区中**有改动的文件**进行检测，可以在提交前进行Lint操作
+- `husky`：触发 Git Hooks,执行脚本
+- `lint-staged`：检测文件，只对暂存区中**有改动的文件**进行检测，可以在提交前进行 Lint 操作
 - `commitizen`：使用规范化的`message`提交
 - `commitlint`: 检查`message`是否符合规范
 - `cz-conventional-changelog`：适配器。提供`conventional-changelog`标准（约定式提交标准）。基于不同需求，也可以使用不同适配器（比如: `cz-customizable`）。
@@ -183,11 +179,11 @@ echo "module.exports = {extends: ['@commitlint/config-conventional']};" > commit
 复制代码
 ```
 
-它会使用`@commitlint/config-conventional`这个包里面提供的校验规则进行校验，你可以理解为ESLint的规则。
+它会使用`@commitlint/config-conventional`这个包里面提供的校验规则进行校验，你可以理解为 ESLint 的规则。
 
-有了这个校验工具，怎么才可以触发校验呢，我们希望在提交代码的时候就进行校验，这时候`husky`就可以出场了，他可以触发`Git Hook`来执行相应的脚本，而我们只需要把刚刚的校验工具加入脚本就可以了，我们使用的是6.0的新版本，下面是具体使用方法：
+有了这个校验工具，怎么才可以触发校验呢，我们希望在提交代码的时候就进行校验，这时候`husky`就可以出场了，他可以触发`Git Hook`来执行相应的脚本，而我们只需要把刚刚的校验工具加入脚本就可以了，我们使用的是 6.0 的新版本，下面是具体使用方法：
 
-我们需要定义触发hook时要执行的Npm脚本：
+我们需要定义触发 hook 时要执行的 Npm 脚本：
 
 - 提交前对暂存区的文件进行代码风格语法校验
 - 对提交的信息进行规范化校验
@@ -206,7 +202,7 @@ echo "module.exports = {extends: ['@commitlint/config-conventional']};" > commit
 复制代码
 ```
 
-接下来就是配置husky通过触发Git Hook执行脚本：
+接下来就是配置 husky 通过触发 Git Hook 执行脚本：
 
 ```
 # 设置脚本`prepare`并且立马执行来安装，此时在根目录下会创建一个`.husky`目录
@@ -222,9 +218,9 @@ npx husky add .husky/commit-msg "yarn commitlint"
 
 此时已经完成配置了，现在团队里面任何成员的提交必须按照严格的规范进行了。
 
-#### 2.1.3 IDE环境约束
+#### 2.1.3 IDE 环境约束
 
-除此之外，我们还统一了VSCode编码环境，通过`Setting Sync`插件使用Public Gist进行同步。
+除此之外，我们还统一了 VSCode 编码环境，通过`Setting Sync`插件使用 Public Gist 进行同步。
 
 > 有人会说小团队做这个有必要吗？我实践了几个月后，我个人还是觉得很有必要的，虽然刚开始配置起来很麻烦，也踩了不少坑，但实际去执行这套流程其实不需要花太多时间，至少可以在开发阶段避免除了代码逻辑以外的错误。
 
@@ -234,22 +230,22 @@ npx husky add .husky/commit-msg "yarn commitlint"
 
 - Docker（容器化技术）
 - Linux
-- Nginx：高性能Web服务器
+- Nginx：高性能 Web 服务器
 - Jenkins：持续构建平台
 - GitLab（本地部署的仓库）
-- Nexus3：用来部署Npm、Docker私有仓库，提供镜像制品库
+- Nexus3：用来部署 Npm、Docker 私有仓库，提供镜像制品库
 
-由于篇幅原因，上述平台的搭建我不会给大家演示了。主要是给大家说一下这个CI流程：
+由于篇幅原因，上述平台的搭建我不会给大家演示了。主要是给大家说一下这个 CI 流程：
 
 - 开发功能
-- Git提交到本地GitLab
-- GitLab触发Webhook
-- Jenkins开发执行脚本构建成Docker镜像
-- 上传Nexus私有仓库
+- Git 提交到本地 GitLab
+- GitLab 触发 Webhook
+- Jenkins 开发执行脚本构建成 Docker 镜像
+- 上传 Nexus 私有仓库
 
 ![图片](https://mmbiz.qpic.cn/sz_mmbiz_png/H8M5QJDxMHp90D6RnMU4HRqCwSEHZvcJE1YrSRKvIHK5CX1Zx1kUCsg6V3RCNZ7b74qY8dzcVRtHvUTLL6eS5w/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1)image.png
 
-现在有了制品仓库就需要`持续部署（CI）`，但是我技术能力不够，只能借助Jenkins执行脚本来实现，但是原则上来说在Docker容器里面部署Docker容器这样的做法并不好，很容易出现一些问题，我想学习完`Kubernetes`后再来对这个流程进行优化。
+现在有了制品仓库就需要`持续部署（CI）`，但是我技术能力不够，只能借助 Jenkins 执行脚本来实现，但是原则上来说在 Docker 容器里面部署 Docker 容器这样的做法并不好，很容易出现一些问题，我想学习完`Kubernetes`后再来对这个流程进行优化。
 
 搭建完流程后，我们只需要在项目中写好`Dockerfile`和`Nginx`的配置文件就可以了，下面是我项目中的一个案例：
 
@@ -300,11 +296,11 @@ server {
 
 这里涉及到很多知识，篇幅有限，就不详细说了。
 
-### 2.3 CSS样式管理
+### 2.3 CSS 样式管理
 
 > 由于 Vite 的目标仅为现代浏览器，因此建议使用原生 CSS 变量和实现 CSSWG 草案的 PostCSS 插件（例如 postcss-nesting）来编写简单的、符合未来标准的 CSS。
 
-官方其实是建议使用CSS变量来编写CSS，但是考虑到现阶段大家用得不是很熟练，所以还是采用了Sass，而且脚手架已经内置了对Sass的支持，我们只需要安装即可,不用像`Webpack`那样需要先安装`Loader`。
+官方其实是建议使用 CSS 变量来编写 CSS，但是考虑到现阶段大家用得不是很熟练，所以还是采用了 Sass，而且脚手架已经内置了对 Sass 的支持，我们只需要安装即可,不用像`Webpack`那样需要先安装`Loader`。
 
 ```
 yarn add sass -D
@@ -320,11 +316,11 @@ yarn add sass -D
 复制代码
 ```
 
-我是按照下面的文件组织来对CSS进行统一管理的：
+我是按照下面的文件组织来对 CSS 进行统一管理的：
 
 **src/assets/styles:**
 
-- variables.scss（存放全局Sass变量）
+- variables.scss（存放全局 Sass 变量）
 - mixins.scss（mixin）
 - common.scss（公共样式）
 - transition.scss（过渡动画样式）
@@ -347,11 +343,11 @@ import '/src/assets/styles/index.scss'
 复制代码
 ```
 
-但是这里会有一个坑，那就是我在`variables.scss`中定义的变量、在`mixins.scss`定义的mixin全部失效了，而且控制台也报错：
+但是这里会有一个坑，那就是我在`variables.scss`中定义的变量、在`mixins.scss`定义的 mixin 全部失效了，而且控制台也报错：
 
 ![图片](https://mmbiz.qpic.cn/sz_mmbiz_png/H8M5QJDxMHp90D6RnMU4HRqCwSEHZvcJG9icPQwdvYfpLSWxxlFkGNPv6BjwkGSPHVOuy00icVBBYHp6pfFJLeHw/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1)image.png
 
-如果不使用这个变量，我在Chrome是可以看到其他样式已经被编译好的，所以我采取了第二种方式导入`index.scss`。我们需要在vite的配置文件给css的预处理器进行配置，它的使用方式和`Vue CLI`中的配置差不多：
+如果不使用这个变量，我在 Chrome 是可以看到其他样式已经被编译好的，所以我采取了第二种方式导入`index.scss`。我们需要在 vite 的配置文件给 css 的预处理器进行配置，它的使用方式和`Vue CLI`中的配置差不多：
 
 **vite.config.js**
 
@@ -369,21 +365,21 @@ export default defineConfig({
 复制代码
 ```
 
-这样就完成了CSS的管理啦，当然我这种比较简单，现在还有一种比较新的用法就是使用CSS Module，希望将来能用上吧。
+这样就完成了 CSS 的管理啦，当然我这种比较简单，现在还有一种比较新的用法就是使用 CSS Module，希望将来能用上吧。
 
 > `Sass`的编写指南，大家可以参考一下：Sass Guidelines
 
 ### 2.4 接口管理
 
-#### 2.4.1 基于Axios二次封装
+#### 2.4.1 基于 Axios 二次封装
 
-基于Axios二次封装已经是一种常规操作了，下面来看看项目中我是如何对API进行管理的：
+基于 Axios 二次封装已经是一种常规操作了，下面来看看项目中我是如何对 API 进行管理的：
 
-- 抽象一个HttpRequest类，主要有请求拦截/取消、REST请求（GET、POST、PUT、Delete）、统一错误处理等功能
-- 实例化这个类，然后分模块编写API请求函数，URL这种常量单独放一个文件，接口请求参数和请求体由使用者决定，最后导出一个对象出口
+- 抽象一个 HttpRequest 类，主要有请求拦截/取消、REST 请求（GET、POST、PUT、Delete）、统一错误处理等功能
+- 实例化这个类，然后分模块编写 API 请求函数，URL 这种常量单独放一个文件，接口请求参数和请求体由使用者决定，最后导出一个对象出口
 - 在组件引入对应的模块即可使用
 
-Vue3.0中最推荐的使用方式是`Composition API`，组件中`this`不推荐使用，所以如果想全局引入，需要这么做：
+Vue3.0 中最推荐的使用方式是`Composition API`，组件中`this`不推荐使用，所以如果想全局引入，需要这么做：
 
 ```
 import { createApp } from 'vue'
@@ -412,15 +408,15 @@ async fetchData() {
 复制代码
 ```
 
-而之前在Vue2中我们只需要在`Vue.prototype`上定义属性，然后在组件中使用`this`引入就可以了。但是全局引入会导致Vue原型很臃肿，每个组件的实例都会有这个属性，会造成一定的性能开销。
+而之前在 Vue2 中我们只需要在`Vue.prototype`上定义属性，然后在组件中使用`this`引入就可以了。但是全局引入会导致 Vue 原型很臃肿，每个组件的实例都会有这个属性，会造成一定的性能开销。
 
-Vue3这种全局引入的做法我觉得也很麻烦，所以我的做法是在使用的组件中导入对应的API模块。
+Vue3 这种全局引入的做法我觉得也很麻烦，所以我的做法是在使用的组件中导入对应的 API 模块。
 
-> 打个小广告：详细的Axios封装可以参考我的另外一篇文章在Vue项目中对Axios进行二次封装。
+> 打个小广告：详细的 Axios 封装可以参考我的另外一篇文章在 Vue 项目中对 Axios 进行二次封装。
 
 #### 2.4.2 载入不同模式下全局变量
 
-此外，我们也可以通过使用`.env`文件来载入不同环境下的全局变量，Vite中也使用了 dotenv来加载额外的环境变量，设置的全局变量必须以`VITE_`为前缀才可以正常被加载，使用方式如下：
+此外，我们也可以通过使用`.env`文件来载入不同环境下的全局变量，Vite 中也使用了 dotenv 来加载额外的环境变量，设置的全局变量必须以`VITE_`为前缀才可以正常被加载，使用方式如下：
 
 **.env.development**
 
@@ -447,7 +443,7 @@ import.meta.env.VITE_APP_BASE_API
 
 #### 2.4.3 跨域问题
 
-Vite是基于Node服务器开发的，所以它也提供了一些配置来实现本地代理，使用方式大家应该很熟悉，这里直接上一个例子：
+Vite 是基于 Node 服务器开发的，所以它也提供了一些配置来实现本地代理，使用方式大家应该很熟悉，这里直接上一个例子：
 
 **vite.config.js**
 
@@ -469,15 +465,15 @@ server: {
 复制代码
 ```
 
-如果线上的服务器后端服务器不是同源部署也会有跨域问题，那么需要在`Ngnix`中配置反向代理，好在后端实现了CORS规范，那我们不需要操心线上的跨域问题了。当然解决跨域的方式有很多，下面要介绍的`WebSocket`就没有这个问题。
+如果线上的服务器后端服务器不是同源部署也会有跨域问题，那么需要在`Ngnix`中配置反向代理，好在后端实现了 CORS 规范，那我们不需要操心线上的跨域问题了。当然解决跨域的方式有很多，下面要介绍的`WebSocket`就没有这个问题。
 
-到这里接口管理相关问题也差不多说完了，项目接口数量并不是特别多，就20多个吧，所以并没有把全部接口全部交给`Vuex`接管，只有一少部分组件依赖的全局状态才放到`Vuex`中。
+到这里接口管理相关问题也差不多说完了，项目接口数量并不是特别多，就 20 多个吧，所以并没有把全部接口全部交给`Vuex`接管，只有一少部分组件依赖的全局状态才放到`Vuex`中。
 
-#### 2.4.4 WebSocket+Vuex状态管理方案
+#### 2.4.4 WebSocket+Vuex 状态管理方案
 
-大屏项目有将近20多个图表都是实时数据，包括设备健康度状态、设备运行指标等等，必须使用`WebSocket`。但是我们项目是SPA应用，每个组件都需要发消息，并且需要共享一个`WebSocket`实例，跨组件通信很麻烦，所以需要对这一块进行封装。
+大屏项目有将近 20 多个图表都是实时数据，包括设备健康度状态、设备运行指标等等，必须使用`WebSocket`。但是我们项目是 SPA 应用，每个组件都需要发消息，并且需要共享一个`WebSocket`实例，跨组件通信很麻烦，所以需要对这一块进行封装。
 
-网上找了很多方案都没有解决我的问题，但是偶然却翻到了一个大佬的文章（websocket长连接和公共状态管理方案），他的文章里提到了基于`WebSocket+Vuex`实现“发布-订阅”模式对全局组件状态进行统一管理。我看完后受益匪浅，我这才知道如果把设计模式用于开发中能有如此“功效”。
+网上找了很多方案都没有解决我的问题，但是偶然却翻到了一个大佬的文章（websocket 长连接和公共状态管理方案），他的文章里提到了基于`WebSocket+Vuex`实现“发布-订阅”模式对全局组件状态进行统一管理。我看完后受益匪浅，我这才知道如果把设计模式用于开发中能有如此“功效”。
 
 我基于大佬的封装又优化了一些：
 
@@ -489,11 +485,11 @@ server: {
 
 ![图片](https://mmbiz.qpic.cn/sz_mmbiz_png/H8M5QJDxMHp90D6RnMU4HRqCwSEHZvcJoURv8rHN4FIZPicpNQIjvp46hItpsvWxMe3JMO7hvkZVjPH4xOjZpiaQ/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1)image.png
 
-组件通过`emit`方法来发送消息，消息里面标识了任务名，后端返回的数据里面也会返回这个任务名，这就形成了一个“管道”。Vuex通过订阅所有消息，然后根据任务名`commit`对应的`mutation`来完成状态变更，最后组件通过Vuex的`store`或者`getter`就能拿到数据了。
+组件通过`emit`方法来发送消息，消息里面标识了任务名，后端返回的数据里面也会返回这个任务名，这就形成了一个“管道”。Vuex 通过订阅所有消息，然后根据任务名`commit`对应的`mutation`来完成状态变更，最后组件通过 Vuex 的`store`或者`getter`就能拿到数据了。
 
 下面是一个完整的例子：
 
-首先封装一个`VueSocket`类，它有发布、订阅、断线重连、心跳检测、错误调度等功能。组件只需要通过`emit`方法来发布消息，通过`subscribe`方法订阅服务端消息，然后通过Vuex的`mutation`来分发消息。
+首先封装一个`VueSocket`类，它有发布、订阅、断线重连、心跳检测、错误调度等功能。组件只需要通过`emit`方法来发布消息，通过`subscribe`方法订阅服务端消息，然后通过 Vuex 的`mutation`来分发消息。
 
 我们目前只需要关注`emit`和`subscribe`两个方法，当然`handleData`这个函数也很重要，主要是对来自不同任务的数据进行分发。
 
@@ -714,7 +710,7 @@ export default VueSocket
 复制代码
 ```
 
-在Vuex中定义初始化`WebSocket`连接的`action`和`mutation`：
+在 Vuex 中定义初始化`WebSocket`连接的`action`和`mutation`：
 
 ```
 import { createStore, createLogger } from 'vuex'
@@ -810,9 +806,9 @@ const handleData = (data, commit) => {
 复制代码
 ```
 
-这个方法十分关键，所有的任务其实只是一个对象中的属性，然后映射的值是一个函数，只要判断这个任务在这个对象里面就会执行对应的函数。而最后任务的执行器其实就是调用了传进来的`commit`函数，触发`mutation`变更状态。我最开始是使用`if/else`或者`switch/case`来处理这个逻辑，但是随着任务越来越多（20多个），代码可读性也变得糟糕起来，所以想了这个办法处理。
+这个方法十分关键，所有的任务其实只是一个对象中的属性，然后映射的值是一个函数，只要判断这个任务在这个对象里面就会执行对应的函数。而最后任务的执行器其实就是调用了传进来的`commit`函数，触发`mutation`变更状态。我最开始是使用`if/else`或者`switch/case`来处理这个逻辑，但是随着任务越来越多（20 多个），代码可读性也变得糟糕起来，所以想了这个办法处理。
 
-下面是Vuex的定义，`store/getters`必须与任务名对应：
+下面是 Vuex 的定义，`store/getters`必须与任务名对应：
 
 ```
 state: {
@@ -895,17 +891,17 @@ onMounted(() => {
 
 然后通过`watch`或`watchEffect`方法监听数据变化，每次变化都去调用`echarts`实例的`setOption`方法来重绘图表，这样就可以实现动态数据变更了，这里就不展开讲了。
 
-#### 2.4.5 数据Mock
+#### 2.4.5 数据 Mock
 
-我们是前后端同步开发，有时候会出现前端开发完接口没开发完的情况，我们可以先根据接口文档（没有接口文档可以问后端要数据库的表）来Mock数据。我们通常有下面的解决方法：
+我们是前后端同步开发，有时候会出现前端开发完接口没开发完的情况，我们可以先根据接口文档（没有接口文档可以问后端要数据库的表）来 Mock 数据。我们通常有下面的解决方法：
 
 - 使用`mockjs`
-- 使用Node部署一个`MockServer`
+- 使用 Node 部署一个`MockServer`
 - 使用静态`JSON`文件
 
-第一种我们比较常用，但是浏览器`NetWork`工具看不到发不出去的请求；第二种需要单独写一套Node服务，或者用第三方服务本地部署，很好用，但是有些麻烦；第三种比较原始就不考虑了。
+第一种我们比较常用，但是浏览器`NetWork`工具看不到发不出去的请求；第二种需要单独写一套 Node 服务，或者用第三方服务本地部署，很好用，但是有些麻烦；第三种比较原始就不考虑了。
 
-最后使用了vite-plugin-mock，这是一个基于Vite开发的插件。
+最后使用了 vite-plugin-mock，这是一个基于 Vite 开发的插件。
 
 > 提供本地和生产模拟服务。vite 的数据模拟插件，是基于 vite.js 开发的。并同时支持本地环境和生产环境。Connect 服务中间件在本地使用，mockjs 在生产环境中使用。
 
@@ -970,18 +966,18 @@ export default [
 
 ## 3.项目遇到的坑
 
-`Vite`和`Vue3`都是较新的技术，而且使用UI框架也是`beta`版本，遇到的坑真是不少，大部分的坑都是靠着官方的`issue`来解决的，好在都能找到对应的`issue`，不然得自己提`issue`等待回复了。
+`Vite`和`Vue3`都是较新的技术，而且使用 UI 框架也是`beta`版本，遇到的坑真是不少，大部分的坑都是靠着官方的`issue`来解决的，好在都能找到对应的`issue`，不然得自己提`issue`等待回复了。
 
 ### 3.1 启动项目就报错（esbuild error）
 
-后面查看相关issue，主要可以从下面几个方法尝试：
+后面查看相关 issue，主要可以从下面几个方法尝试：
 
 - 不要用中文名路径
 - 不用`Git Bash`来启动
 - 删除`node_modules`重新安装
 - 将`npm`换成`yarn`
 
-具体issue忘记记录了，大家如果也碰到相关问题可以按照上面的方式尝试。
+具体 issue 忘记记录了，大家如果也碰到相关问题可以按照上面的方式尝试。
 
 ### 3.2 `@vue/compiler-sfc` 3.0.7 版本后打包后，`style scoped`里面的样式失效
 
@@ -994,7 +990,7 @@ export default [
 
 ### 3.3 父组件使用`ref`访问子组件（子组件使用了 setup sugar）时，`ref`值为`{}`
 
-相关issue：
+相关 issue：
 
 - Setup sugar cannot pass the ref object to the ref function param.But I can get the ref object correctly with no sugar
 
@@ -1004,29 +1000,28 @@ export default [
 
 ### 4.1 线上错误监控（sentry）
 
-Vite生产环境下是通过`rollup`进行打包的，即使本地开发进行了测试也没有复现的BUG，但是我们是无法知道用户的使用场景的，线上的BUG总会有我们想不到的地方，这一块的基础设施后续有时间必须安排上。
+Vite 生产环境下是通过`rollup`进行打包的，即使本地开发进行了测试也没有复现的 BUG，但是我们是无法知道用户的使用场景的，线上的 BUG 总会有我们想不到的地方，这一块的基础设施后续有时间必须安排上。
 
 ### 4.2 Monorepo
 
 我为了追求速度，搭建完一套系统后，就复制它给其他系统用。但其实里面有很多可以复用的模块，除了上传私有`Npm`，还有一个更好的方式就是`Monorepo`，它把所有子项目集中在一起管理，而且这几个子项目都跟业务强相关,不用再切来切去了，最重要就的就是它只需要走一套`CI/CD`流程就行了。
 
-### 4.3 Git工作流
+### 4.3 Git 工作流
 
-Git工作流没有搭建是因为我们就2-3个人，走这套流程时间不允许。但是以后有新成员加入，团队人员变多后就需要这套工作流了。
+Git 工作流没有搭建是因为我们就 2-3 个人，走这套流程时间不允许。但是以后有新成员加入，团队人员变多后就需要这套工作流了。
 
 ### 4.4 定制脚手架
 
 项目搭建完，可以把一些业务代码与配置抽离出去，然后搭建一个自己的脚手架，当然也可以基于业务定制化脚手架，这样以后有相关架构的项目可以直接基于这个脚手架开发，节省前期基础设施搭建的时间。
 
-### 4.5 多个Echarts组件实时渲染数据掉帧，吃内存
+### 4.5 多个 Echarts 组件实时渲染数据掉帧，吃内存
 
 这是我之前没有考虑到的性能优化问题，我以为我考虑很全面了，结果还是把最重要的性能优化给忘了，这是我的失职。所以以后开发任何业务功能，都需要考虑性能，在满足基本需求下，加大量级去考虑问题。
 
-比如我这个Echarts图表渲染问题，20多个图表，上万的数据实时渲染，目前还只是掉帧吃内存，如果把量级加大到几十万条数据呢？
+比如我这个 Echarts 图表渲染问题，20 多个图表，上万的数据实时渲染，目前还只是掉帧吃内存，如果把量级加大到几十万条数据呢？
 
 ## 5.总结
 
 本文主要是对我前三个月所做项目的总结与反省，我从项目搭建角度出发，给大家讲述了如何让项目变得规范和严谨，最后得出一些自己的思考，我希望自己能从这次项目中成长起来，也希望给大家带来一次分享，从中受益，也欢迎大家批评指正。
 
 最后还要提一嘴的是，我们的团队很小，也不是大公司，正因为这个原因我才有机会尝试这些新鲜技术，并用于实战，但是我们也需要承担自己的责任，出了任何问题都要站出来解决。
-

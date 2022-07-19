@@ -1,7 +1,5 @@
 # API
 
-
-
 # 一、全局配置
 
 ## 1.1 错误处理
@@ -12,22 +10,18 @@
 app.config.errorHandler = (err, vm, info) => {
   // 处理错误
   // `info` 是 Vue 特定的错误信息，比如错误所在的生命周期钩子
-}
+};
 ```
-
-
 
 ### warnHandler
 
 ```js
-app.config.warnHandler = function(msg, vm, trace) {
+app.config.warnHandler = function (msg, vm, trace) {
   // `trace` 是组件的继承关系追踪
-}
+};
 ```
 
-
-
-# 二、应用API
+# 二、应用 API
 
 ## component
 
@@ -48,20 +42,18 @@ app.config.warnHandler = function(msg, vm, trace) {
 - **示例：**
 
 ```js
-import { createApp } from 'vue'
+import { createApp } from "vue";
 
-const app = createApp({})
+const app = createApp({});
 
 // 注册一个名为my-component的组件
-app.component('my-component', {
+app.component("my-component", {
   /* ... */
-})
+});
 
 // 检索注册的组件(始终返回构造函数)
-const MyComponent = app.component('my-component')
+const MyComponent = app.component("my-component");
 ```
-
-
 
 ## directive
 
@@ -71,8 +63,6 @@ const MyComponent = app.component('my-component')
 - **返回值：**
   - 如果传入 `definition` 参数，返回应用实例。
   - 如果不传入 `definition` 参数，返回指令定义。
-
-
 
 指令钩子传递了这些参数：
 
@@ -99,25 +89,19 @@ const MyComponent = app.component('my-component')
 
 上一个虚拟节点，仅在 `beforeUpdate` 和 `updated` 钩子中可用。
 
-
-
-
-
-# 三、全局API
+# 三、全局 API
 
 ## h
 
 ```js
-h('div', {}, [
-  'Some text comes first.',
-  h('h1', 'A headline'),
+h("div", {}, [
+  "Some text comes first.",
+  h("h1", "A headline"),
   h(MyComponent, {
-    someProp: 'foobar'
-  })
-])
+    someProp: "foobar",
+  }),
+]);
 ```
-
-
 
 ## defineComponent
 
@@ -128,24 +112,20 @@ h('div', {}, [
 
 ```js
 // setup函数
-import { defineComponent, ref } from 'vue'
+import { defineComponent, ref } from "vue";
 
 const HelloWorld = defineComponent(function HelloWorld() {
-  const count = ref(0)
-  return { count }
-})
+  const count = ref(0);
+  return { count };
+});
 ```
-
-
 
 ## defineAsyncComponent
 
 创建一个只有在需要时才会加载的异步组件。
 
 ```js
-defineAsyncComponent(() =>
-  import('./components/AsyncComponent.vue')
-)
+defineAsyncComponent(() => import("./components/AsyncComponent.vue"));
 ```
 
 对于高阶用法，`defineAsyncComponent` 可以接受一个对象：
@@ -153,11 +133,11 @@ defineAsyncComponent(() =>
 `defineAsyncComponent` 方法还可以返回以下格式的对象：
 
 ```js
-import { defineAsyncComponent } from 'vue'
+import { defineAsyncComponent } from "vue";
 
 const AsyncComp = defineAsyncComponent({
   // 工厂函数
-  loader: () => import('./Foo.vue'),
+  loader: () => import("./Foo.vue"),
   // 加载异步组件时要使用的组件
   loadingComponent: LoadingComponent,
   // 加载失败时要使用的组件
@@ -179,40 +159,36 @@ const AsyncComp = defineAsyncComponent({
   onError(error, retry, fail, attempts) {
     if (error.message.match(/fetch/) && attempts <= 3) {
       // 请求发生错误时重试，最多可尝试 3 次
-      retry()
+      retry();
     } else {
       // 注意，retry/fail 就像 promise 的 resolve/reject 一样：
       // 必须调用其中一个才能继续错误处理。
-      fail()
+      fail();
     }
-  }
-})
+  },
+});
 ```
 
 **参考**：[动态和异步组件](https://v3.cn.vuejs.org/guide/component-dynamic-async.html)
 
-
-
 ## useCssModule
-
-
 
 ```vue
 <script>
-import { h, useCssModule } from 'vue'
+import { h, useCssModule } from "vue";
 export default {
   setup() {
-    const style = useCssModule()
+    const style = useCssModule();
     return () =>
       h(
-        'div',
+        "div",
         {
-          class: style.success
+          class: style.success,
         },
-        'Task complete!'
-      )
-  }
-}
+        "Task complete!"
+      );
+  },
+};
 </script>
 <style module>
 .success {
@@ -223,17 +199,11 @@ export default {
 
 关于使用 CSS 模块的更多信息，请参阅 [单文件组件样式特性：`style module`](https://v3.cn.vuejs.org/api/sfc-style.html#style-module)。
 
-
-
 # 四、选项
-
-
 
 ## data
 
 以 `_` 或 `$` 开头的 property 不会被组件实例代理，因为它们可能和 Vue 内置的 property、API 方法冲突。你可以使用例如 `vm.$data._property` 的方式访问这些 property。
-
-
 
 ## expose 3.2+
 
@@ -253,25 +223,23 @@ export default {
   export default {
     // increment 将被暴露，
     // 但 count 只能被内部访问
-    expose: ['increment'],
-  
+    expose: ["increment"],
+
     data() {
       return {
-        count: 0
-      }
+        count: 0,
+      };
     },
-  
+
     methods: {
       increment() {
-        this.count++
-      }
-    }
-  }
+        this.count++;
+      },
+    },
+  };
   ```
 
 - **参考：** [defineExpose](https://v3.cn.vuejs.org/api/sfc-script-setup.html#defineexpose)
-
-
 
 ## errorCaptured
 
@@ -292,8 +260,6 @@ export default {
   - 如果此 `errorCaptured` 钩子自身抛出了一个错误，则这个新错误和原本被捕获的错误都会发送给全局的 `config.errorHandler`。
   - 一个 `errorCaptured` 钩子能够返回 `false` 以阻止错误继续向上传播。本质上是说“这个错误已经被搞定了且应该被忽略”。它会阻止其它任何会被这个错误唤起的 `errorCaptured` 钩子和全局的 `config.errorHandler`
 
-
-
 ## extends
 
 - **类型：**`Object`
@@ -312,7 +278,7 @@ export default {
 
   ```js
   const CompA = { ... }
-  
+
   const CompB = {
     extends: CompA,
     ...
@@ -325,28 +291,24 @@ export default {
 
 `setup` 还可以返回一个渲染函数，该函数可以直接使用在同一作用域中声明的响应式状态：
 
-
-
 **参数：**
 
 ```js
 const MyComponent = {
   setup(props, context) {
-    context.attrs
-    context.slots
-    context.emit
-    context.expose
-  }
-}
+    context.attrs;
+    context.slots;
+    context.emit;
+    context.expose;
+  },
+};
 ```
 
-> expose为vue3.2版本中新增的API
-
-
+> expose 为 vue3.2 版本中新增的 API
 
 ## watch
 
-参数Options
+参数 Options
 
 - **选项：flush**
 
@@ -382,8 +344,6 @@ const MyComponent = {
   <span v-pre>{{ this will not be compiled }}</span>
   ```
 
-
-
 ### v-cloak
 
 - **不需要表达式**
@@ -401,18 +361,12 @@ const MyComponent = {
   ```
 
   ```html
-  <div v-cloak>
-    {{ message }}
-  </div>
+  <div v-cloak>{{ message }}</div>
   ```
 
   不会显示，直到编译结束。
 
-  
-
 ### [v-memo 3.2+](https://v3.cn.vuejs.org/api/directives.html#v-memo)
-
-
 
 ## ref
 
@@ -427,8 +381,6 @@ const MyComponent = {
 <child-component :ref="(el) => child = el"></child-component>
 ```
 
-
-
 ## teleport
 
 - **Props：**
@@ -440,7 +392,7 @@ const MyComponent = {
   <teleport to="#some-id" />
   <teleport to=".some-class" />
   <teleport to="[data-teleport]" />
-  
+
   <!-- 错误 -->
   <teleport to="h1" />
   <teleport to="some-string" />
@@ -454,13 +406,6 @@ const MyComponent = {
   </teleport>
   ```
 
-  
-
   请注意，这将移动实际的 DOM 节点，而不是被销毁和重新创建，并且它还将保持任何组件实例的活动状态。所有有状态的 HTML 元素 (即播放的视频) 都将保持其状态。
 
-
-
 # 五、响应性基础
-
-
-
