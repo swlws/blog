@@ -40,7 +40,7 @@ sudo firewall-cmd --add-port=5432/tcp --permanent
 sudo firewall-cmd --reload
 ```
 
-**IP绑定**
+**IP 绑定**
 
 ```bash
 #修改配置文件
@@ -51,7 +51,7 @@ vi /var/lib/pgsql/12/data/postgresql.conf
 listen_addresses='*'
 ```
 
-**IP监听**
+**IP 监听**
 
 ```bash
 #修改配置文件
@@ -95,4 +95,3 @@ GRANT ALL PRIVILEGES ON DATABASE mydb TO test;
 #移除指定账户指定数据库所有权限
 REVOKE ALL PRIVILEGES ON DATABASE mydb TO test
 ```
-
