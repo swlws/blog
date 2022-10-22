@@ -1,8 +1,10 @@
 # rss
+
 VSCode-RSS is a Visual Studio Code extension that provides an embedded RSS reader. With it, you can read news and blog freely in VSCode after a long time of coding.
 
 ## install
-插件市场检索rss，安装插件。
+
+插件市场检索 rss，安装插件。
 
 ## recommand config
 
@@ -39,4 +41,3 @@ VSCode-RSS is a Visual Studio Code extension that provides an embedded RSS reade
     }
   },
 ```
-
