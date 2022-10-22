@@ -2,8 +2,6 @@
 
 - 地址：https://v3.cn.vuejs.org/guide/introduction.html
 
-
-
 # 一、计算属性添加`set`方法
 
 ```js
@@ -20,8 +18,6 @@ computed: {
 
 ```
 
-
-
 # 二、条件渲染
 
 ## v-if
@@ -30,16 +26,12 @@ computed: {
 - 可以使用在`<template>` 元素上。
 - 也是**惰性的**，如果在初始渲染时条件为假，则什么也不做——直到条件第一次变为真时，才会开始渲染条件块。
 
-
-
-## v-show 
+## v-show
 
 - 不管初始条件是什么，元素总是会被渲染，并且只是简单地基于 CSS（ `display`） 进行切换
 - 不支持 `<template>` 元素
 
-
-
-# 三、KEY的作用 - [link](https://v3.cn.vuejs.org/api/special-attributes.html#key)
+# 三、KEY 的作用 - [link](https://v3.cn.vuejs.org/api/special-attributes.html#key)
 
 1. 主要用做 Vue 的虚拟 DOM 算法的提示，以在比对新旧节点组时辨识 VNodes
 
@@ -61,8 +53,6 @@ eg：
 </transition>
 ```
 
-
-
 # 四、事件处理
 
 ## 4.1 $event
@@ -70,9 +60,7 @@ eg：
 有时也需要在内联语句处理器中访问原始的 DOM 事件。可以用特殊变量 `$event` 把它传入方法：
 
 ```html
-<button @click="warn('Form cannot be submitted yet.', $event)">
-  Submit
-</button>
+<button @click="warn('Form cannot be submitted yet.', $event)">Submit</button>
 ```
 
 ```js
@@ -88,34 +76,26 @@ methods: {
 }
 ```
 
-
-
 ## 4.2 多事件
 
 事件处理程序中可以有多个方法，这些方法由逗号运算符分隔：
 
 ```html
 <!-- 这两个 one() 和 two() 将执行按钮点击事件 -->
-<button @click="one($event), two($event)">
-  Submit
-</button>
+<button @click="one($event), two($event)">Submit</button>
 ```
-
-
 
 ## 4.3 事件修饰符
 
-| 修饰符  | 描述                                                         |
-| ------- | ------------------------------------------------------------ |
-| stop    | <!-- 阻止单击事件继续传播 --><br /><a @click.stop="doThis"></a> |
-| prevent | <!-- 提交事件不再重载页面 --> <br /><form @submit.prevent="onSubmit"></form> |
-| capture | <!-- 添加事件监听器时使用事件捕获模式 --> <br /><!-- 即内部元素触发的事件先在此处理，然后才交由内部元素进行处理 --> <br /><div @click.capture="doThis">...</div> |
-| self    | <!-- 只当在 event.target 是当前元素自身时触发处理函数 --> <br /><!-- 即事件不是从内部元素触发的 --> <br /><div @click.self="doThat">...</div> |
-| once    | <!-- 点击事件将只会触发一次 --> <br /><a @click.once="doThis"></a> |
+| 修饰符  | 描述                                                                                                                                                                                                                            |
+| ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| stop    | <!-- 阻止单击事件继续传播 --><br /><a @click.stop="doThis"></a>                                                                                                                                                                 |
+| prevent | <!-- 提交事件不再重载页面 --> <br /><form @submit.prevent="onSubmit"></form>                                                                                                                                                    |
+| capture | <!-- 添加事件监听器时使用事件捕获模式 --> <br /><!-- 即内部元素触发的事件先在此处理，然后才交由内部元素进行处理 --> <br /><div @click.capture="doThis">...</div>                                                                |
+| self    | <!-- 只当在 event.target 是当前元素自身时触发处理函数 --> <br /><!-- 即事件不是从内部元素触发的 --> <br /><div @click.self="doThat">...</div>                                                                                   |
+| once    | <!-- 点击事件将只会触发一次 --> <br /><a @click.once="doThis"></a>                                                                                                                                                              |
 | passive | <!-- 滚动事件的默认行为 (即滚动行为) 将会立即触发   --> <br /><!-- 而不会等待 `onScroll` 完成                   --> <br /><!-- 这其中包含 `event.preventDefault()` 的情况   --> <br /><div @scroll.passive="onScroll">...</div> |
-|         |                                                              |
-
-
+|         |                                                                                                                                                                                                                                 |
 
 ## 4.4 按键修饰符
 
@@ -129,8 +109,6 @@ methods: {
 - `.left`
 - `.right`
 
-
-
 ## 4.5 系统修饰符
 
 - `.ctrl`
@@ -140,15 +118,11 @@ methods: {
 
 在 Mac 系统键盘上，meta 对应 command 键 (⌘)。在 Windows 系统键盘 meta 对应 Windows 徽标键 (⊞)
 
-
-
 ## 4.6 鼠标按钮修饰符
 
 - `.left`
 - `.right`
 - `.middle`
-
-
 
 ## 4.7 `.exact` 修饰符
 
@@ -165,37 +139,27 @@ methods: {
 <button @click.exact="onClick">A</button>
 ```
 
-
-
 # 五、表单
 
 ## 5.1 修饰符
 
 ### `.lazy`
 
-在默认情况下，`v-model` 在每次 `input` 事件触发后将输入框的值与数据进行同步 (除了[上述](https://v3.cn.vuejs.org/guide/forms.html#vmodel-ime-tip)输入法组织文字时)。你可以添加 `lazy` 修饰符，从而转为在 `change` 事件_之后_进行同步
-
-
+在默认情况下，`v-model` 在每次 `input` 事件触发后将输入框的值与数据进行同步 (除了[上述](https://v3.cn.vuejs.org/guide/forms.html#vmodel-ime-tip)输入法组织文字时)。你可以添加 `lazy` 修饰符，从而转为在 `change` 事件*之后*进行同步
 
 ### `.number`
 
 如果想自动将用户的输入值转为数值类型，可以给 `v-model` 添加 `number` 修饰符
 
-
-
 ### `.trim`
 
 如果要自动过滤用户输入的首尾空白字符，可以给 `v-model` 添加 `trim` 修饰符
 
-
-
 # 六、组件
-
-
 
 ## 6.1 v-model
 
-**表单元素上使用v-model**
+**表单元素上使用 v-model**
 
 ```html
 <input v-model="searchText" />
@@ -209,30 +173,30 @@ methods: {
 
 **组件上使用`v-model`**
 
- 不指定变量时，默认使用`model-value`
+不指定变量时，默认使用`model-value`
 
 ```html
 <custom-input v-model="searchText"></custom-input>
 ```
 
 ```js
-app.component('custom-input', {
-  props: ['modelValue'],
-  emits: ['update:modelValue'],
+app.component("custom-input", {
+  props: ["modelValue"],
+  emits: ["update:modelValue"],
   template: `
     <input v-model="value">
   `,
   computed: {
     value: {
       get() {
-        return this.modelValue
+        return this.modelValue;
       },
-      set(value) { 
-        this.$emit('update:modelValue', value)
-      }
-    }
-  }
-})
+      set(value) {
+        this.$emit("update:modelValue", value);
+      },
+    },
+  },
+});
 ```
 
 手动指定变量
@@ -261,8 +225,6 @@ app.component("custom-input2", {
 });
 ```
 
-
-
 ## 6.2 Element Placement Restrictions
 
 `blog-post-row`是一个自定义组件
@@ -272,8 +234,6 @@ app.component("custom-input2", {
   <tr is="vue:blog-post-row"></tr>
 </table>
 ```
-
-
 
 ## 6.3 Props
 
@@ -298,9 +258,7 @@ post: {
 <blog-post v-bind:id="post.id" v-bind:title="post.title"></blog-post>
 ```
 
-
-
-### 6.3.2 Prop验证
+### 6.3.2 Prop 验证
 
 ```js
 // 自定义验证函数
@@ -312,17 +270,13 @@ propF: {
 },
 ```
 
-
-
-## 6.4 v-model自定义的修饰符
+## 6.4 v-model 自定义的修饰符
 
 ### 场景一：不带变量
 
 ```html
 <my-component v-model.capitalize="myText"></my-component>
 ```
-
-
 
 ```js
 props: {
@@ -349,8 +303,6 @@ props: ['description', 'descriptionModifiers'],
 emits: ['update:description'],
 ```
 
-
-
 # 七、插槽
 
 ```html
@@ -359,19 +311,15 @@ emits: ['update:description'],
 
 // 插槽引用
 <template v-slot:header="props">
-	<div>
-    {{props.data}}
-  </div>
+  <div>{{props.data}}</div>
 </template>
 ```
 
 具名插槽的缩写
 
-> v-slot  ===>  #default
+> v-slot ===> #default
 >
-> v-slot:heaer  ===>  #header
-
-
+> v-slot:heaer ===> #header
 
 # 八、Provide / Inject
 
@@ -403,8 +351,6 @@ provide(){
 inject: ["user"]
 ```
 
-
-
 # 九、keep-alive
 
 ```vue-html
@@ -414,11 +360,7 @@ inject: ["user"]
 </keep-alive>
 ```
 
-
-
 # 十、过渡 & 动画
-
-
 
 ## 10.1 进入过渡 & 离开过渡
 
@@ -429,8 +371,6 @@ inject: ["user"]
 - out-in
 - In-out
 
-
-
 ## 10.2 列表过渡
 
 - 默认情况下，它不会渲染一个包裹元素，但是你可以通过 `tag` attribute 指定渲染一个元素。
@@ -438,19 +378,13 @@ inject: ["user"]
 - 内部元素**总是需要**提供唯一的 `key` attribute 值。
 - CSS 过渡的类将会应用在内部的元素中，而不是这个组/容器本身。
 
-
-
 ### 10.2.1 列表的移动过渡
 
 ```html
 <transition-group name="list" tag="p">
-  <span v-for="item in items" :key="item" class="list-item">
-    {{ item }}
-  </span>
+  <span v-for="item in items" :key="item" class="list-item"> {{ item }} </span>
 </transition-group>
 ```
-
-
 
 ```css
 .list-item {
@@ -474,8 +408,6 @@ inject: ["user"]
 }
 ```
 
-
-
 # 十一、Composition API
 
 ## 11.1 setup
@@ -485,22 +417,18 @@ inject: ["user"]
 1. props
 2. context
 
-
-
 ### props
 
-- props是响应式的
+- props 是响应式的
 - 因为 `props` 是响应式的，你**不能使用 ES6 解构**，它会消除 prop 的响应性。
 
 在`props`上使用解构，同时保持响应式，方式：
 
 ```js
- const { title } = toRefs(props)
- 
- const title = toRef(props, 'title')
+const { title } = toRefs(props);
+
+const title = toRef(props, "title");
 ```
-
-
 
 ### context
 
@@ -508,52 +436,46 @@ inject: ["user"]
 
 ```js
 type context = {
-  attrs: any; // Attribute (非响应式对象，等同于 $attrs)
-  slots: any; // 插槽 (非响应式对象，等同于 $slots)
-  emit: any; // 触发事件 (方法，等同于 $emit)
-  expose: any; // // 暴露公共 property (函数)
-}
+  attrs: any, // Attribute (非响应式对象，等同于 $attrs)
+  slots: any, // 插槽 (非响应式对象，等同于 $slots)
+  emit: any, // 触发事件 (方法，等同于 $emit)
+  expose: any, // // 暴露公共 property (函数)
+};
 ```
-
-
 
 ## 返回值
 
 1. 对象
 2. 函数
 
-
-
 当返回值为对象时，`template`模板中访问时是[被自动浅解包](https://v3.cn.vuejs.org/guide/reactivity-fundamentals.html#ref-解包)的，因此不应在模板中使用 `.value`。
 
 当返回是函数时：
 
 ```js
-import { h, ref } from 'vue'
+import { h, ref } from "vue";
 export default {
   setup(props, { expose }) {
-    const count = ref(0)
-    const increment = () => ++count.value
+    const count = ref(0);
+    const increment = () => ++count.value;
 
     expose({
-      increment
-    })
+      increment,
+    });
 
-    return () => h('div', count.value)
-  }
-}
+    return () => h("div", count.value);
+  },
+};
 ```
 
 使用`expose`向外部暴露函数
-
-
 
 ## 11.2 生命周期钩子
 
 | 选项式 API        | Hook inside `setup` |
 | ----------------- | ------------------- |
-| `beforeCreate`    | Not needed*         |
-| `created`         | Not needed*         |
+| `beforeCreate`    | Not needed\*        |
+| `created`         | Not needed\*        |
 | `beforeMount`     | `onBeforeMount`     |
 | `mounted`         | `onMounted`         |
 | `beforeUpdate`    | `onBeforeUpdate`    |
@@ -566,8 +488,6 @@ export default {
 | `activated`       | `onActivated`       |
 | `deactivated`     | `onDeactivated`     |
 
-
-
 ## 11.3 provide & inject
 
 `provide` 函数允许你通过两个参数定义 property：
@@ -575,40 +495,34 @@ export default {
 1. name (`<String>` 类型)
 2. value
 
-
-
 `inject` 函数有两个参数：
 
 1. 要 inject 的 property 的 name
 2. 默认值 (**可选**)
-
-
 
 ## 11.4 模板引用（ref）
 
 ### 单个引用
 
 ```html
-<template> 
+<template>
   <div ref="root">This is a root element</div>
 </template>
 
 <script>
-  import { ref, onMounted } from 'vue'
+  import { ref, onMounted } from "vue";
 
   export default {
     setup() {
-      const root = ref(null)
+      const root = ref(null);
 
       return {
-        root
-      }
-    }
-  }
+        root,
+      };
+    },
+  };
 </script>
 ```
-
-
 
 ### 多个引用
 
@@ -620,28 +534,26 @@ export default {
 </template>
 
 <script>
-  import { ref, reactive, onBeforeUpdate } from 'vue'
+  import { ref, reactive, onBeforeUpdate } from "vue";
 
   export default {
     setup() {
-      const list = reactive([1, 2, 3])
-      const divs = ref([])
+      const list = reactive([1, 2, 3]);
+      const divs = ref([]);
 
       // 确保在每次更新之前重置ref
       onBeforeUpdate(() => {
-        divs.value = []
-      })
+        divs.value = [];
+      });
 
       return {
         list,
-        divs
-      }
-    }
-  }
+        divs,
+      };
+    },
+  };
 </script>
 ```
-
-
 
 ## 11.5 自定义指令
 
@@ -658,80 +570,66 @@ export default {
 - `beforeUnmount`：在卸载绑定元素的父组件之前调用
 - `unmounted`：当指令与元素解除绑定且父组件已卸载时，只调用一次。
 
-
-
 函数简写， `mounted` 和 `updated` 会触发同一行为
 
 ```js
-app.directive('pin', (el, binding) => {
-  el.style.position = 'fixed'
-  const s = binding.arg || 'top'
-  el.style[s] = binding.value + 'px'
-})
+app.directive("pin", (el, binding) => {
+  el.style.position = "fixed";
+  const s = binding.arg || "top";
+  el.style[s] = binding.value + "px";
+});
 ```
-
-
 
 ## 11.6 Teleport
 
 ```html
 <teleport to="body">
-  <div>hello</div>     
+  <div>hello</div>
 </teleport>
 ```
 
 将内容移动到指定元素的里面。值为`标签名`或者`ID`
 
-
-
 ## 11.7 渲染函数
 
-通过render函数绘制页面
+通过 render 函数绘制页面
 
-
-
-### 11.7.1 render函数
+### 11.7.1 render 函数
 
 返回值：
 
 - string
 - h()
 
+### 11.7.2 h 函数
 
-
-### 11.7.2 h函数
-
-#### 创建非组件VNode
+#### 创建非组件 VNode
 
 ```js
 h(
-  'a',
+  "a",
   {
     name: headingId,
-    href: '#' + headingId
+    href: "#" + headingId,
   },
   this.$slots.default()
-)
+);
 ```
 
-
-
-#### 创建组件VNode
+#### 创建组件 VNode
 
 **方式一：**
 
 ```js
-h(ButtonCounter)
+h(ButtonCounter);
 ```
 
 **方式二：**
 
 ```js
-const ButtonCounter = resolveComponent('ButtonCounter')
-h(ButtonCounter)
+const ButtonCounter = resolveComponent("ButtonCounter");
+h(ButtonCounter);
 ```
-
-
 
 ### 11.7.3 JSX
 
@@ -745,23 +643,19 @@ render() {
 }
 ```
 
-
-
 ### 11.7.4 函数式组件
 
 ```js
 const FunctionalComponent = (props, context) => {
   // ...
-}
+};
 // 函数式组件的Props定义
-FunctionalComponent.props = ['value']
+FunctionalComponent.props = ["value"];
 // 函数式组件的emits定义
-FunctionalComponent.emits = ['click']
+FunctionalComponent.emits = ["click"];
 ```
 
 第二个参数 `context` 包含三个 property：`attrs`、`emit` 和 `slots`。它们分别相当于实例的 [`$attrs`](https://v3.cn.vuejs.org/api/instance-properties.html#attrs)、[`$emit`](https://v3.cn.vuejs.org/api/instance-methods.html#emit) 和 [`$slots`](https://v3.cn.vuejs.org/api/instance-properties.html#slots) 这几个 property。
-
-
 
 # 十二、插件
 
@@ -772,8 +666,6 @@ FunctionalComponent.emits = ['click']
 3. 通过全局 mixin 来添加一些组件选项。(如[vue-router](https://github.com/vuejs/vue-router))
 4. 添加全局实例方法，通过把它们添加到 `config.globalProperties` 上实现。
 5. 一个库，提供自己的 API，同时提供上面提到的一个或多个功能。如 [vue-router](https://github.com/vuejs/vue-router)
-
-
 
 `app.vue`接收的参数:
 
@@ -787,23 +679,17 @@ type Plugin_2 = (PluginInstallFunction & {
 use(plugin: Plugin_2, ...options: any[]): this;
 ```
 
-
-
 `app.use`会自动阻止你多次使用同一插件，因此在同一插件上多次调用只会安装一次该插件。
-
-
 
 ## 十三、使用 Vue 构建自定义元素
 
 [link - 使用 Vue 构建自定义元素](https://v3.cn.vuejs.org/guide/web-components.html#%E4%BD%BF%E7%94%A8-vue-%E6%9E%84%E5%BB%BA%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%83%E7%B4%A0)
 
-
-
 # 十四、响应式
 
-vue3使用proxy实现响应式系统
+vue3 使用 proxy 实现响应式系统
 
-**watch的简单实现：**
+**watch 的简单实现：**
 
 ```js
 const runningEffects = [];
@@ -920,71 +806,60 @@ let timer = setInterval(() => {
   console.log(i++, "--------");
   v1.v += 100;
 }, 1000);
-
 ```
-
-
 
 ## 14.1 reactive
 
 ```js
-import { reactive } from 'vue'
+import { reactive } from "vue";
 
 const book = reactive({
-  author: 'Vue Team',
-  title: 'Vue 3 Guide',
-})
+  author: "Vue Team",
+  title: "Vue 3 Guide",
+});
 
 // 使用解构的两个 property 的响应性都会丢失
-let { author, title } = book 
+let { author, title } = book;
 
 // 正确做法
-let { author, title } = toRefs(book)
+let { author, title } = toRefs(book);
 ```
-
-
 
 ## 14.2 readonly
 
 只读的 proxy 对象
 
 ```js
-import { reactive, readonly } from 'vue'
+import { reactive, readonly } from "vue";
 
-const original = reactive({ count: 0 })
+const original = reactive({ count: 0 });
 
-const copy = readonly(original)
+const copy = readonly(original);
 
 // 通过 original 修改 count，将会触发依赖 copy 的侦听器
 
-original.count++
+original.count++;
 
 // 通过 copy 修改 count，将导致失败并出现警告
-copy.count++ // 警告: "Set operation on key 'count' failed: target is readonly."
+copy.count++; // 警告: "Set operation on key 'count' failed: target is readonly."
 ```
-
-
 
 ## 14.3 computed
 
 ```js
-const count = ref(1)
-const plusOne = computed(() => count.value + 1)
+const count = ref(1);
+const plusOne = computed(() => count.value + 1);
 
 // 带有set的computed
 const plusOne = computed({
   get: () => count.value + 1,
-  set: val => {
-    count.value = val - 1
-  }
-})
+  set: (val) => {
+    count.value = val - 1;
+  },
+});
 ```
 
-
-
 ## 14.4 watchEffect
-
-
 
 - watchEffect
 - watchPostEffect
@@ -998,9 +873,9 @@ watchEffect(
     /* ... */
   },
   {
-    flush: 'post' // 默认为pre
+    flush: "post", // 默认为pre
   }
-)
+);
 ```
 
 ### 侦听器调试
@@ -1017,13 +892,11 @@ watchEffect(
   },
   {
     onTrigger(e) {
-      debugger
-    }
+      debugger;
+    },
   }
-)
+);
 ```
-
-
 
 ## 14.5 watch
 
@@ -1038,13 +911,9 @@ watchEffect(
 
 - 可以监听一个、多个数据源
 
-
-
 # 十五、单文件组件（SFC）
 
 Vue SFC 是框架指定的文件格式，必须由 [@vue/compiler-sfc](https://github.com/vuejs/vue-next/tree/master/packages/compiler-sfc) 预编译为标准的 JavaScript 与 CSS。编译后的 SFC 是一个标准的 JavaScript（ES）模块
-
-
 
 ## 15.1 组件引用声明
 
@@ -1063,33 +932,23 @@ setup() {
 }
 ```
 
-
-
 ## 15.6 路由
 
 - vue-router
--  [Page.js](https://github.com/visionmedia/page.js)。使用了 Page.js 的[完整示例](https://github.com/phanan/vue-3.0-simple-routing-example/tree/pagejs)。
--  [Director](https://github.com/flatiron/director)
-
-
+- [Page.js](https://github.com/visionmedia/page.js)。使用了 Page.js 的[完整示例](https://github.com/phanan/vue-3.0-simple-routing-example/tree/pagejs)。
+- [Director](https://github.com/flatiron/director)
 
 # 十六、状态管理
 
 - vuex
 
-
-
 配合`vue3`实现简单的状态管理
-
-
 
 # [十七、服务端渲染](https://v3.cn.vuejs.org/guide/ssr.html#ssr-%E5%AE%8C%E5%85%A8%E6%8C%87%E5%8D%97)
 
 - Nuxt.js
 - Vite ssr
 - Quasar Framework SSR + PWA
-
-
 
 # 十八、安全
 
