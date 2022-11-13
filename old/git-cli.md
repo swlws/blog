@@ -33,6 +33,7 @@ git reset HEAD <file> // 从暂缓区撤销
 git checkout -- <file> // 丢弃工作区的修改
 
 git checkout -b <branch>	// 创建并切换分支
+git checkout  <branch>	// 切换分支
 git branch <branch> 		// 新建本地分支
 git branch -d <branch>	// 删除本地分支
 git push origin --delete <branch> // 删除远程分支
