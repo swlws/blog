@@ -1,10 +1,7 @@
-# 个人主页
+> 🤩🤩🤩🤩🤩🤩🤩🤩🤩🤩🤩🤩🤩🤩
+> To [个人主页](https://swlws.github.io/) 关注不迷路 😙😙😙
 
-🤩🤩🤩🤩🤩🤩🤩🤩🤩🤩🤩🤩🤩🤩
-
-To [个人主页](https://swlws.github.io/) 关注不迷路 😙😙😙
-
-# 博客目录
+# 目录
 
 - [git-cli](./old/git-cli.md)
 - [一些网站](./old/一些网站.md)
