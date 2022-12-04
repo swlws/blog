@@ -1,6 +1,6 @@
 # HTTP 速查手册
 
-# 通用身份验证
+# 一、通用身份验证
 
 ```bash
 # 服务端返回401，并告知验证类型为Basic
@@ -11,7 +11,7 @@ WWW-Authenticate: Basic realm="description"
 Authorization: Basic xxxxxxxxxx
 ```
 
-# Cookie
+# 二、Cookie
 
 ```bash
 # 服务端返回set-cookie
@@ -22,9 +22,7 @@ set-cookie: age=xxxxx
 Cookie: name=xxxxx; age=xxxxx
 ```
 
-# 重定向
-
-## 永久重定向
+# 三、永久重定向
 
 ```bash
 # 状态码配置为301
@@ -33,7 +31,7 @@ GET 301
 Location: http://example.com
 ```
 
-## 临时重定向
+# 四、临时重定向
 
 ```bash
 # 状态码配置为302
@@ -42,7 +40,7 @@ GET 302
 Location: http://example.com
 ```
 
-## HTML 重定向
+# 五、HTML 重定向
 
 ```html
 <!-- 通过HTML标签实现重定向 -->
@@ -56,7 +54,7 @@ Location: http://example.com
 window.location = "http://example.com/";
 ```
 
-# 访问控制策略
+# 六、访问控制策略
 
 ```js
 // headers配置
@@ -71,7 +69,7 @@ Access-Control-Allow-Headers: *
 Access-Control-Max-Age: 86400
 ```
 
-# HTTP 缓存
+# 七、HTTP 缓存
 
 混存的种类：
 
@@ -80,7 +78,7 @@ Access-Control-Max-Age: 86400
   - 代理缓存。eg：代理设备（Nginx 代理）
   - 托管缓存。eg：反向代理、CDN 和 service worker 与缓存 API 的组合。
 
-## Cache-Control
+## 7.1 Cache-Control
 
 **Response：**
 
@@ -102,7 +100,7 @@ Access-Control-Max-Age: 86400
 | no-store | 即使源服务端的响应，可以被缓存，也不应该缓存     |
 | max-age  | 客户端告诉服务端，客户端允许的最大缓存时长（秒） |
 
-## 验证响应
+## 7.2 验证响应
 
 **基于文件最后更新时间**
 
@@ -122,7 +120,7 @@ Access-Control-Max-Age: 86400
 
 > Cache-Control: max-age=0, must-revalidate
 
-# 范围请求
+# 八、范围请求
 
 _STEP 1：检测是否支持范围请求_
 
