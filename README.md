@@ -1,5 +1,4 @@
 > 🤩🤩🤩🤩🤩🤩🤩🤩🤩🤩🤩🤩🤩🤩
-> To [个人主页](https://swlws.github.io/) 关注不迷路 😙😙😙
 
 # 目录
 
@@ -15,3 +14,13 @@
   - [中断 HTTP 请求的方式](./202211/中断HTTP请求.md)
   - [DOM Observer](./202211/Observer.md)
   - [Web 蜜罐](./202211/Web蜜罐.md)
+
+---
+
+<center>
+
+![公众号-逛街的喵啊](https://b2.swlwsflow.tk/file/swlws-b2/wechat/qrcode_258.jpg)
+
+公众号-逛街的喵啊
+
+</center>
