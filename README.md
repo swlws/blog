@@ -1,6 +1,6 @@
 > 🤩🤩🤩🤩🤩🤩🤩🤩🤩🤩🤩🤩🤩🤩
 
-# 目录
+# List
 
 - [git-cli](./old/git-cli.md)
 - [一些网站](./old/一些网站.md)
@@ -17,10 +17,10 @@
 
 ---
 
-<center>
+<div align="center">
 
-![公众号-逛街的喵啊](https://b2.swlwsflow.tk/file/swlws-b2/wechat/qrcode_258.jpg)
+<img alt="公众号-逛街的喵啊" src="https://b2.swlwsflow.tk/file/swlws-b2/wechat/qrcode_344.jpg" width=200 />
 
-公众号-逛街的喵啊
+<strong>公众号-逛街的喵啊</strong>
 
-</center>
+</div>
