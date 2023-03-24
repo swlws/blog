@@ -7,6 +7,7 @@
   - [微前端-微前端是什么](./202303/微前端.md)
   - [微前端-qiankun](./202303/qiankun.md)
   - [微前端-qiankun_vite_vue3](./202303/qiankun_vite_vue3.md)
+  - [几种并发 Promise 的实现方式](./202303/%E5%87%A0%E7%A7%8D%E5%B9%B6%E5%8F%91Promise%E7%9A%84%E5%AE%9E%E7%8E%B0.md)
 
 - 202301
 
