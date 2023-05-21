@@ -20,7 +20,7 @@
 | DOMCharacterDataModified    | 检测 DOM 节点的文本变化                                                                                                                                |                                                                |
 | DOMSubtreeModified          | 用于代替（DOMAttributeModified、DOMCharacterDataModified、DOMNodeInserted、DOMNodeInsertedIntoDocument、DOMNodeRemoved 和 DOMNodeRemovedFromDocument） | IE9 环境存在 BUG，当 Node 第一时间被插入时，不会立即触发此事件 |
 
-这里的`非Document`指的是，节点不在 DOM 树上的场景。如节点存放与内存中，[Code 演示](https://github.com/swlws/blog/tree/master/202305)
+这里的`非Document`指的是，节点不在 DOM 树上的场景。如节点存放与内存中，[Code 演示](https://github.com/swlws/blog/tree/master/202305/code/watch-dom.html)
 
 # 二、MutationObserver
 
