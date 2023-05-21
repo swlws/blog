@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Watch DOM</title>
+    <style>
+      #box {
+        display: flex;
+      }
+      #log {
+        flex: 1;
+        border: 1px solid #e8e8e8;
+        padding: 10px;
+        margin: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <button>添加到Fragment</button>
+    <button>从Fragment移除</button>
+
+    <button>添加到Document</button>
+    <button>属性、文本变化</button>
+    <button>从Document移除</button>
+
+    <div id="log"></div>
+
+    <script>
+      class Watch {
+        logRef = document.querySelector("#log");
+        eleRef = document.createElement("div");
+        btnRefs = document.querySelectorAll("button");
+        fragmentRef = document.createDocumentFragment();
+        step = 0;
+
+        constructor() {
+          this._power();
+          this._setBtnStatus();
+        }
+
+        _setBtnStatus() {
+          this.btnRefs.forEach((el, i) => {
+            el.disabled = i === this.step ? false : true;
+          });
+        }
+
+        _power() {
+          [
+            "DOMNodeRemoved",
+            "DOMNodeRemovedFromDocument",
+            "DOMNodeInserted",
+            "DOMNodeInsertedIntoDocument",
+            "DOMAttributeModified",
+            "DOMSubtreeModified",
+            "DOMCharacterDataModified",
+          ].forEach((name) => {
+            this.eleRef.addEventListener(name, (event) => {
+              this.logRef.innerHTML += `<div>${event.type}</div>`;
+            });
+          });
+
+          this.btnRefs.forEach((btn) => {
+            btn.addEventListener("click", this._exec.bind(this));
+          });
+        }
+
+        _exec() {
+          switch (this.step) {
+            case 0:
+              this.fragmentRef.appendChild(this.eleRef);
+              break;
+            case 1:
+              this.eleRef.remove();
+              break;
+            case 2:
+              document.body.appendChild(this.eleRef);
+              break;
+            case 3:
+              this.eleRef.dataset.time = new Date().getTime();
+              this.eleRef.setAttribute("color", "red");
+              this.eleRef.innerText = new Date().getTime();
+              break;
+            case 4:
+              this.eleRef.remove();
+              break;
+
+            default:
+              throw "error";
+              break;
+          }
+
+          this.step = ++this.step % this.btnRefs.length;
+          this._setBtnStatus();
+        }
+      }
+
+      new Watch();
+
+      const log2 = document.getElementById("#body_log");
+      document.body.addEventListener("DOMSubtreeModified", function (e) {
+        console.log("DOMSubtreeModified");
+      });
+    </script>
+  </body>
+</html>
