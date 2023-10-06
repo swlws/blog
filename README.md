@@ -1,6 +1,18 @@
-> 🤩🤩🤩🤩🤩🤩🤩🤩🤩🤩🤩🤩🤩🤩
-
 # List
+
+- 202310
+
+  - [双周回顾#001 - 火烧云](./weekly/001/readme.md)
+
+- 202309
+
+  - [minimap](./202309/minimap/readme.md)
+  - [width](./202309/width/readme.md)
+
+- 202308
+
+  - [chrome memory](./202308/Chrome-Memory.md)
+  - [vue \$destroy](./202308/vue之$destroy.md)
 
 - 202305
 
@@ -34,7 +46,7 @@
 
 <div align="center">
 
-<img alt="公众号-逛街的喵啊" src="https://b2.swlwsflow.tk/file/swlws-b2/wechat/qrcode_344.jpg" width=200 />
+<img alt="公众号-逛街的喵啊" src="https://f004.backblazeb2.com/file/swlws-b2/wechat/qrcode_344.jpg" width=200 />
 
 <strong>公众号-逛街的喵啊</strong>
 
