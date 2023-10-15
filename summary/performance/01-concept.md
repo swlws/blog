@@ -24,6 +24,40 @@
 />
 ```
 
-插件：
+# 图片
+
+```html
+<picture>
+  <source
+    srcset="/media/cc0-images/surfer-240-200.jpg"
+    media="(orientation: portrait)"
+  />
+  <img src="/media/cc0-images/painted-hand-298-332.jpg" alt="" />
+</picture>
+```
+
+主流图像类型：
+
+1. 光栅（位图）。JPEG、PNG、GIF
+   - 有损。JPEG、WebP（有损）
+   - 无损。GIF、PNG、WebP（无损）
+2. SVG。矢量图，任意缩放不会任何视觉效果
+
+自适应图片
+
+```html
+<img
+  src="image-small.jpg"
+  srcset="image-medium.jpg 640w, image-large.jpg 1280w"
+/>
+
+<img
+  src="image-small.jpg"
+  srcset="image-medium.jpg 640w, image-large.jpg 1280w"
+  sizes="(min-width: 704px) 50vw, 100vw"
+/>
+```
+
+# 插件：
 
 1. 提供网格条线
