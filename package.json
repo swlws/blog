@@ -1,0 +1,12 @@
+{
+  "name": "blog",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "image": "node ./script/image_handler"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
